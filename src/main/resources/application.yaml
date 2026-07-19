@@ -1,0 +1,39 @@
+server:
+  port: ${ZPAW_PORT:9426}
+
+spring:
+  application:
+    name: zpaw
+
+zpaw:
+  home: ${ZPAW_HOME:#{systemProperties['user.home']}/.zpaw}
+  agent:
+    name: ${ZPAW_AGENT_NAME:zpaw}
+    sys-prompt: >
+      You are a helpful local assistant named zpaw.
+      Answer accurately and concisely.
+      You have access to tools for file operations, document
+      generation, and knowledge search.
+      When generating documents, create them in your workspace
+      directory.
+  model:
+    default-model: ${ZPAW_DEFAULT_MODEL:dashscope:qwen-plus}
+    providers:
+      - id: dashscope
+        api-key: ${DASHSCOPE_API_KEY:}
+        model-name: ${ZPAW_MODEL_NAME:qwen-plus}
+        stream: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    cn.zane: DEBUG
+    io.agentscope: INFO
