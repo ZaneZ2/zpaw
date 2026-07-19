@@ -37,3 +37,26 @@ build/
 
 .agentscope
 nul
+.codegraph
+.mempalace
+
+# Node
+node_modules/
+frontend/node_modules/
+*.tsbuildinfo
+
+# Build output
+src/main/resources/static/
+logs/
+
+# IDE
+.opencode/
+.pi/
+.pi-subagents/
+
+# Superpowers SDD progress
+.superpowers/
+
+# MemPalace per-project files (issue #185)
+mempalace.yaml
+entities.json

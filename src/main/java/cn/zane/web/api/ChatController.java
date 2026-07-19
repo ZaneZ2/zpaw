@@ -4,6 +4,7 @@ import cn.zane.bootstrap.ZPawBootstrap;
 import io.agentscope.core.event.TextBlockDeltaEvent;
 import io.agentscope.core.event.ToolCallStartEvent;
 import io.agentscope.core.message.UserMessage;
+import java.time.Duration;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,12 +24,14 @@ public class ChatController {
     }
 
     @PostMapping(value = "/{agentId}/chat/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> stream(@PathVariable String agentId, @RequestBody ChatRequest req) {
+    public Flux<String> stream(
+            @PathVariable("agentId") String agentId, @RequestBody ChatRequest req) {
         var agent = bootstrap.getDefaultAgent();
         if (agent == null) {
             return Flux.just("data: {\"type\":\"error\",\"error\":\"Agent not initialized\"}\n\n");
         }
         return agent.streamEvents(new UserMessage(req.message()))
+                .timeout(Duration.ofSeconds(60))
                 .map(
                         event -> {
                             if (event instanceof TextBlockDeltaEvent e) {
