@@ -1,10 +1,11 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useNavigate, Routes, Route, Navigate } from 'react-router-dom';
 import ProLayout from '@ant-design/pro-layout';
 import {
   ToolOutlined,
   WechatOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
+import ChatPage from './pages/ChatPage';
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -21,11 +22,9 @@ function Placeholder({ title }: { title: string }) {
   );
 }
 
-function Dashboard() {
-  return <Placeholder title="zPaw 仪表盘" />;
-}
-
 export default function App() {
+  const navigate = useNavigate();
+
   return (
     <ProLayout
       title="zPaw"
@@ -33,16 +32,26 @@ export default function App() {
       route={{
         path: '/',
         routes: [
-          { path: '/agents', name: 'Agents', icon: <WechatOutlined /> },
+          { path: '/agents', name: '聊天', icon: <WechatOutlined /> },
           { path: '/tools', name: '工具', icon: <ToolOutlined /> },
           { path: '/settings', name: '设置', icon: <SettingOutlined /> },
         ],
       }}
-      menuItemRender={(item, dom) => <a href={item.path || '/'}>{dom}</a>}
+      menuItemRender={(item, dom) => {
+        const path = item.path || '/';
+        return (
+          <span
+            onClick={() => navigate(path)}
+            style={{ cursor: 'pointer', display: 'block', width: '100%' }}
+          >
+            {dom}
+          </span>
+        );
+      }}
     >
       <Routes>
         <Route path="/" element={<Navigate to="/agents" replace />} />
-        <Route path="/agents" element={<Dashboard />} />
+        <Route path="/agents" element={<ChatPage />} />
         <Route path="/tools" element={<Placeholder title="工具管理" />} />
         <Route path="/settings" element={<Placeholder title="设置" />} />
       </Routes>
