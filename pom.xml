@@ -55,6 +55,12 @@
             <artifactId>agentscope-harness</artifactId>
         </dependency>
 
+        <!-- Model extensions -->
+        <dependency>
+            <groupId>io.agentscope</groupId>
+            <artifactId>agentscope-extensions-model-openai</artifactId>
+        </dependency>
+
         <!-- IM channel implementations -->
         <dependency>
             <groupId>io.agentscope</groupId>

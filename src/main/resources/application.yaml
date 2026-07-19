@@ -17,11 +17,16 @@ zpaw:
       When generating documents, create them in your workspace
       directory.
   model:
-    default-model: ${ZPAW_DEFAULT_MODEL:dashscope:qwen-plus}
+    default-model: ${ZPAW_DEFAULT_MODEL:openai:agents-2.0-flash}
     providers:
       - id: dashscope
         api-key: ${DASHSCOPE_API_KEY:}
         model-name: ${ZPAW_MODEL_NAME:qwen-plus}
+        stream: true
+      - id: openai
+        api-key: ${OPENAI_API_KEY:}
+        base-url: ${OPENAI_BASE_URL:}
+        model-name: ${OPENAI_MODEL_ID:agents-2.0-flash}
         stream: true
 
 management:
