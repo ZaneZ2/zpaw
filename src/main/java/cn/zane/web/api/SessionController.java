@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 public class SessionController {
 
     /**
-     * List inbox sessions for the given agent.
+     * 获取指定 Agent 的会话收件箱。
      *
      * @param agentId the agent identifier
      * @return a list of session summaries with last activity info
@@ -44,7 +44,7 @@ public class SessionController {
     }
 
     /**
-     * Get conversation turns for a specific session.
+     * 获取指定会话的消息列表。
      *
      * @param agentId    the agent identifier
      * @param sessionKey the session key
@@ -58,7 +58,7 @@ public class SessionController {
     }
 
     /**
-     * Reset a session, clearing its conversation history.
+     * 重置会话，清空对话历史。
      *
      * @param agentId    the agent identifier
      * @param sessionKey the session key to reset

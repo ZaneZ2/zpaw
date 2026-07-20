@@ -25,7 +25,7 @@ public class AgentController {
     private final ZPawBootstrap bootstrap;
 
     /**
-     * List all available agents.
+     * 获取所有 Agent 列表。
      *
      * @return a list of agent summaries, each containing id, name and builtin flag
      */
@@ -47,7 +47,7 @@ public class AgentController {
     }
 
     /**
-     * Get an agent by its id.
+     * 根据 ID 获取 Agent。
      *
      * @param id the agent identifier
      * @return agent detail containing id, name and builtin flag

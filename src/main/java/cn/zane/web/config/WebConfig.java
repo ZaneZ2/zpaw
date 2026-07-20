@@ -15,7 +15,7 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 public class WebConfig implements WebFluxConfigurer {
 
     /**
-     * Configure CORS mappings for the application.
+     * 配置 CORS 映射。
      *
      * <p>Allows all origins and standard HTTP methods on {@code /api/**} paths.</p>
      *

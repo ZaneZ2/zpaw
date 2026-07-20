@@ -19,9 +19,9 @@ import reactor.core.publisher.Mono;
 public class KnowledgeController {
 
     /**
-     * Upload a knowledge document.
+     * 上传知识库文档。
      *
-     * @return a JSON string indicating the upload status (currently not implemented)
+     * @return 包含上传状态的 JSON 字符串（当前未实现）
      */
     @PostMapping("/upload")
     public Mono<String> upload() {
@@ -29,9 +29,9 @@ public class KnowledgeController {
     }
 
     /**
-     * Search knowledge base.
+     * 搜索知识库。
      *
-     * @return a JSON string with search results (currently not implemented)
+     * @return 包含搜索结果的 JSON 字符串（当前未实现）
      */
     @PostMapping("/search")
     public Mono<String> search() {

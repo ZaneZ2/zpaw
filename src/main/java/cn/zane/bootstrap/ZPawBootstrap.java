@@ -31,10 +31,9 @@ public class ZPawBootstrap {
     private HarnessAgent defaultAgent;
 
     /**
-     * Initialize the default HarnessAgent after bean construction.
+     * 初始化默认的 HarnessAgent。
      *
-     * <p>Reads model and agent configuration from properties, builds and assigns
-     * the default {@link HarnessAgent} instance.</p>
+     * <p>从配置中读取模型和 Agent 配置，构建并赋值默认的 {@link HarnessAgent} 实例。</p>
      */
     @PostConstruct
     public void init() {
@@ -48,7 +47,7 @@ public class ZPawBootstrap {
     }
 
     /**
-     * Clean up resources before bean destruction.
+     * 销毁时释放资源。
      */
     @PreDestroy
     public void destroy() {
@@ -56,9 +55,9 @@ public class ZPawBootstrap {
     }
 
     /**
-     * Get the configured agent name.
+     * 获取配置的 Agent 名称。
      *
-     * @return the agent name from properties
+     * @return 配置中的 Agent 名称
      */
     public String getAgentName() {
         return agentProperties.getName();

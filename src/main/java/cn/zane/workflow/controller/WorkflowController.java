@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 public class WorkflowController {
 
     /**
-     * List all workflows.
+     * 获取所有工作流。
      *
      * @return a JSON array string of workflows (currently returns empty array)
      */

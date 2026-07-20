@@ -18,7 +18,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfig {
 
     /**
-     * Configure the security filter chain.
+     * 配置安全过滤器链（全部放行 + 禁用 CSRF）。
      *
      * <p>Currently permits all requests and disables CSRF protection for API usage.</p>
      *
