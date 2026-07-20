@@ -3,7 +3,6 @@ package cn.zane.web.api;
 import cn.zane.bootstrap.ZPawBootstrap;
 import java.util.List;
 import java.util.Map;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+/**
+ * Agent 管理 REST 控制器。
+ *
+ * <p>提供 Agent 的列表查询和详情获取接口。</p>
+ *
+ * @author Zane
+ */
 @RestController
 @RequestMapping("/api/agents")
 @RequiredArgsConstructor
@@ -18,6 +24,11 @@ public class AgentController {
 
     private final ZPawBootstrap bootstrap;
 
+    /**
+     * List all available agents.
+     *
+     * @return a list of agent summaries, each containing id, name and builtin flag
+     */
     @GetMapping
     public Mono<List<Map<String, Object>>> list() {
         var agent = bootstrap.getDefaultAgent();
@@ -35,6 +46,12 @@ public class AgentController {
                                 true)));
     }
 
+    /**
+     * Get an agent by its id.
+     *
+     * @param id the agent identifier
+     * @return agent detail containing id, name and builtin flag
+     */
     @GetMapping("/{id}")
     public Mono<Map<String, Object>> get(@PathVariable("id") String id) {
         return Mono.just(Map.of("id", id, "name", bootstrap.getAgentName(), "builtin", true));

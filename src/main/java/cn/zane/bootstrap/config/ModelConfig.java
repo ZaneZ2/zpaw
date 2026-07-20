@@ -11,8 +11,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 读取 ModelProperties 中的 providers 列表，为每个 provider 创建 Model 实例
- * 并注册到 AgentScope 的 ModelRegistry，使得 defaultModel 字符串可解析。
+ * 模型实例注册配置。
+ *
+ * <p>读取 {@link ModelProperties} 中的 providers 列表，为每个 provider 创建
+ * {@link Model} 实例并注册到 AgentScope 的 {@link ModelRegistry}，
+ * 使得 {@code defaultModel} 字符串可解析为具体的 Model 对象。
+ *
+ * @author Zane
  */
 @Slf4j
 @Configuration

@@ -11,6 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+/**
+ * ZPaw 应用引导组件。
+ *
+ * <p>负责在应用启动时初始化默认的 {@link HarnessAgent}，并在应用关闭时执行清理。</p>
+ *
+ * @author Zane
+ */
 @Slf4j
 @Getter
 @Component
@@ -23,6 +30,12 @@ public class ZPawBootstrap {
 
     private HarnessAgent defaultAgent;
 
+    /**
+     * Initialize the default HarnessAgent after bean construction.
+     *
+     * <p>Reads model and agent configuration from properties, builds and assigns
+     * the default {@link HarnessAgent} instance.</p>
+     */
     @PostConstruct
     public void init() {
         String modelStr = modelConfig.getDefaultModel();
@@ -34,11 +47,19 @@ public class ZPawBootstrap {
         log.info("HarnessAgent '{}' initialized with model '{}'", agentName, modelStr);
     }
 
+    /**
+     * Clean up resources before bean destruction.
+     */
     @PreDestroy
     public void destroy() {
         log.info("Shutting down HarnessAgent");
     }
 
+    /**
+     * Get the configured agent name.
+     *
+     * @return the agent name from properties
+     */
     public String getAgentName() {
         return agentProperties.getName();
     }

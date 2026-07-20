@@ -6,9 +6,25 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+/**
+ * 安全配置。
+ *
+ * <p>配置 Spring Security WebFlux 安全过滤链，当前放行所有请求并禁用 CSRF。</p>
+ *
+ * @author Zane
+ */
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
+
+    /**
+     * Configure the security filter chain.
+     *
+     * <p>Currently permits all requests and disables CSRF protection for API usage.</p>
+     *
+     * @param http the {@link ServerHttpSecurity} to configure
+     * @return the built {@link SecurityWebFilterChain}
+     */
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
         return http.authorizeExchange(e -> e.anyExchange().permitAll())
