@@ -12,6 +12,8 @@ import io.agentscope.core.event.ToolResultTextDeltaEvent;
 import io.agentscope.core.message.UserMessage;
 import java.time.Duration;
 import java.util.Map;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +35,10 @@ import reactor.core.scheduler.Schedulers;
  */
 @RestController
 @RequestMapping("/api/agents")
+@RequiredArgsConstructor
 public class ChatController {
 
     private final ZPawBootstrap bootstrap;
-
-    public ChatController(ZPawBootstrap bootstrap) {
-        this.bootstrap = bootstrap;
-    }
 
     /**
      * SSE 流式聊天接口。

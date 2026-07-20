@@ -2,6 +2,8 @@ package cn.zane.web.api;
 
 import java.util.List;
 import java.util.Map;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/agents/{agentId}/sessions")
+@RequiredArgsConstructor
 public class SessionController {
 
     @GetMapping("/inbox")

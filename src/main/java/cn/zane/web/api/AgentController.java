@@ -3,6 +3,8 @@ package cn.zane.web.api;
 import cn.zane.bootstrap.ZPawBootstrap;
 import java.util.List;
 import java.util.Map;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +13,10 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/agents")
+@RequiredArgsConstructor
 public class AgentController {
 
     private final ZPawBootstrap bootstrap;
-
-    public AgentController(ZPawBootstrap bootstrap) {
-        this.bootstrap = bootstrap;
-    }
 
     @GetMapping
     public Mono<List<Map<String, Object>>> list() {
