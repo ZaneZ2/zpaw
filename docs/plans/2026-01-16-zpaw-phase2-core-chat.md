@@ -29,7 +29,6 @@
 ```java
 package cn.zane.bootstrap;
 
-import cn.zane.bootstrap.config.ModelConfig;
 import io.agentscope.harness.agent.HarnessAgent;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -49,7 +48,7 @@ public class ZPawBootstrap {
         defaultAgent = HarnessAgent.builder()
                 .name("zpaw")
                 .sysPrompt("You are a helpful local assistant named zpaw. " +
-                           "Answer accurately and concisely.")
+                        "Answer accurately and concisely.")
                 .model("dashscope:qwen-plus")
                 .build();
         log.info("HarnessAgent initialized");

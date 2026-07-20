@@ -37,7 +37,7 @@ public class AgentController {
     }
 
     @GetMapping("/{id}")
-    public Mono<Map<String, Object>> get(@PathVariable String id) {
+    public Mono<Map<String, Object>> get(@PathVariable("id") String id) {
         return Mono.just(Map.of("id", id, "name", bootstrap.getAgentName(), "builtin", true));
     }
 }

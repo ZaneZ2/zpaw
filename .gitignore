@@ -54,6 +54,10 @@ logs/
 .pi/
 .pi-subagents/
 
+# Generated outputs
+graphify-out/
+.ruff_cache/
+
 # Superpowers SDD progress
 .superpowers/
 
