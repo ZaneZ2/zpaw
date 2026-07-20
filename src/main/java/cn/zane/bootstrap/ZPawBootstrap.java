@@ -1,7 +1,9 @@
 package cn.zane.bootstrap;
 
+import cn.zane.agent.tools.DocumentTool;
 import cn.zane.bootstrap.config.AgentProperties;
 import cn.zane.bootstrap.config.ModelProperties;
+import io.agentscope.core.tool.Toolkit;
 import io.agentscope.harness.agent.HarnessAgent;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -27,6 +29,7 @@ public class ZPawBootstrap {
 
     private final ModelProperties modelConfig;
     private final AgentProperties agentProperties;
+    private final DocumentTool documentTool;
 
     private HarnessAgent defaultAgent;
 
@@ -41,8 +44,17 @@ public class ZPawBootstrap {
         String agentName = agentProperties.getName();
         String sysPrompt = agentProperties.getSysPrompt();
         log.info("Initializing HarnessAgent '{}' with model: {}", agentName, modelStr);
+
+        Toolkit toolkit = new Toolkit();
+        toolkit.registerTool(documentTool);
+
         defaultAgent =
-                HarnessAgent.builder().name(agentName).sysPrompt(sysPrompt).model(modelStr).build();
+                HarnessAgent.builder()
+                        .name(agentName)
+                        .sysPrompt(sysPrompt)
+                        .model(modelStr)
+                        .toolkit(toolkit)
+                        .build();
         log.info("HarnessAgent '{}' initialized with model '{}'", agentName, modelStr);
     }
 
