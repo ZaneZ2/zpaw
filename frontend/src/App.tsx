@@ -4,8 +4,11 @@ import {
 	ToolOutlined,
 	WechatOutlined,
 	SettingOutlined,
+	DatabaseOutlined,
 } from "@ant-design/icons";
 import ChatPage from "./pages/ChatPage";
+import ToolsPage from "./pages/ToolsPage";
+import KnowledgePage from "./pages/KnowledgePage";
 
 function Placeholder({ title }: { title: string }) {
 	return (
@@ -34,6 +37,7 @@ export default function App() {
 				routes: [
 					{ path: "/agents", name: "聊天", icon: <WechatOutlined /> },
 					{ path: "/tools", name: "工具", icon: <ToolOutlined /> },
+					{ path: "/knowledge", name: "知识库", icon: <DatabaseOutlined /> },
 					{ path: "/settings", name: "设置", icon: <SettingOutlined /> },
 				],
 			}}
@@ -52,7 +56,8 @@ export default function App() {
 			<Routes>
 				<Route path="/" element={<Navigate to="/agents" replace />} />
 				<Route path="/agents" element={<ChatPage />} />
-				<Route path="/tools" element={<Placeholder title="工具管理" />} />
+				<Route path="/tools" element={<ToolsPage />} />
+				<Route path="/knowledge" element={<KnowledgePage />} />
 				<Route path="/settings" element={<Placeholder title="设置" />} />
 			</Routes>
 		</ProLayout>
