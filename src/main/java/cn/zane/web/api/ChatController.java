@@ -12,6 +12,7 @@ import io.agentscope.core.event.ToolResultTextDeltaEvent;
 import io.agentscope.core.message.UserMessage;
 import java.time.Duration;
 import java.util.Map;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,29 +76,29 @@ public class ChatController {
                 .timeout(Duration.ofSeconds(120))
                 // 将 AgentEvent 映射为 StreamEvent → SSE 字符串
                 .map(
-                        event -> {
-                            if (event instanceof AgentStartEvent e) {
-                                return StreamEvent.agentStart(e.getName());
-                            } else if (event instanceof TextBlockDeltaEvent e) {
-                                return StreamEvent.token(e.getDelta());
-                            } else if (event instanceof ToolCallStartEvent e) {
-                                return StreamEvent.toolCall(e.getToolCallName());
-                            } else if (event instanceof ToolResultStartEvent e) {
-                                return StreamEvent.toolResultStart(e.getToolCallName());
-                            } else if (event instanceof ToolResultTextDeltaEvent e) {
-                                return StreamEvent.toolResultDelta(e.getDelta());
-                            } else if (event instanceof ToolResultEndEvent e) {
-                                String state =
-                                        e.getState() != null ? e.getState().name() : "SUCCESS";
-                                return StreamEvent.toolResultEnd(state);
-                            } else if (event instanceof AgentEndEvent) {
-                                // Agent 正常结束，不做任何输出，流由 filter + concatWithValues 闭合
-                                return null;
-                            }
-                            return null;
-                        })
+                        event ->
+                                switch (event) {
+                                    case AgentStartEvent e -> StreamEvent.agentStart(e.getName());
+                                    case TextBlockDeltaEvent e -> StreamEvent.token(e.getDelta());
+                                    case ToolCallStartEvent e ->
+                                            StreamEvent.toolCall(e.getToolCallName());
+                                    case ToolResultStartEvent e ->
+                                            StreamEvent.toolResultStart(e.getToolCallName());
+                                    case ToolResultTextDeltaEvent e ->
+                                            StreamEvent.toolResultDelta(e.getDelta());
+                                    case ToolResultEndEvent e -> {
+                                        String state =
+                                                e.getState() != null
+                                                        ? e.getState().name()
+                                                        : "SUCCESS";
+                                        yield StreamEvent.toolResultEnd(state);
+                                    }
+                                    // Agent 正常结束，不做任何输出，流由 filter + concatWithValues 闭合
+                                    case AgentEndEvent agentEndEvent -> null;
+                                    default -> null;
+                                })
                 // 过滤掉 null（AGENT_END 等不需要输出的事件）
-                .filter(e -> e != null)
+                .filter(Objects::nonNull)
                 // 转 SSE 格式
                 .map(StreamEvent::toSse)
                 // 流正常结束时追加 done 事件

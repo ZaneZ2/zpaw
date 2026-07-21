@@ -3,6 +3,7 @@ package cn.zane.web.api;
 import cn.zane.agent.tools.DocumentTool;
 import java.util.List;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/tools")
+@RequiredArgsConstructor
 public class ToolsController {
 
     private final DocumentTool documentTool;
-
-    public ToolsController(DocumentTool documentTool) {
-        this.documentTool = documentTool;
-    }
 
     /**
      * 获取所有可用工具的列表。
